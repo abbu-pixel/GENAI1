@@ -11,12 +11,6 @@ def index():
 @app.route("/chat", methods=["POST"])
 def chat():
     data = request.get_json()
-    user_input = data.get("query", "")
-    try:
-        reply = llm.generate_response(user_input)
-    except Exception as e:
-        reply = f"Error: {str(e)}"
-    return jsonify({"response": reply})
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    user_input = data.get("message", "")
+    reply = llm.generate_response(user_input)  # Use correct method name
+    return jsonify({"reply": reply})
